@@ -6,22 +6,22 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faBars} from "@fortawesome/free-solid-svg-icons";
 
 
-export default async function InstancedNav() {
+export default async function NavBarComponent() {
   const secondaryRoutes = [
     {
       label: 'ruta 1',
       key: 'businesses',
-      routeName: '/search/businesses',
+      routeName: '/',
     },
     {
       label: 'ruta 2',
       key: 'events',
-      routeName: '/search/events',
+      routeName: '/',
     },
     {
       label: 'ruta 3',
       key: 'offers',
-      routeName: '/search/offers',
+      routeName: '/',
     },
   ] satisfies Route[];
 
