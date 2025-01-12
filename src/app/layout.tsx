@@ -4,12 +4,12 @@ import outfit from '@/app/fonts';
 
 import '@fortawesome/fontawesome-svg-core/styles.css';
 import {config} from '@fortawesome/fontawesome-svg-core';
-import InstancedNav from "@components/InstancedNav";
+import NavBarComponent from "@components/NavBarComponent";
 
 config.autoAddCss = false;
 
 export const metadata: Metadata = {
-  title: "Detecom",
+  title: "Ergo Solutions",
   description: "Slogan",
 };
 
@@ -23,7 +23,7 @@ export default function RootLayout({
       <body
         className={`${outfit.variable} bg-white`}
       >
-        <InstancedNav />
+        <NavBarComponent />
         {children}
       </body>
     </html>
