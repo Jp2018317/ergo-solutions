@@ -16,7 +16,7 @@ import {useRouter} from 'next/navigation';
 import {ImageItem} from './image-item';
 
 export interface ProductCarouselProps extends React.HTMLAttributes<HTMLDivElement> {
-  productInfo: { product: any };
+  productInfo: { product: { name: string, description: string } };
   image?: { key: string, downloadUrl: string },
   redirect?: string
 }
