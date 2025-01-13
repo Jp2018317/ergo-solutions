@@ -3,7 +3,7 @@
 import {cn} from '@/lib/utils';
 import Image from 'next/image';
 import React from 'react';
-import Detecom from '@public/logo/detecom.svg';
+import Detecom from '@public/logo/detecom.webp';
 import Link from 'next/link';
 import {Route} from '@/config';
 import {cva, VariantProps} from 'class-variance-authority';
