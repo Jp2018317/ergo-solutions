@@ -4,7 +4,9 @@ import outfit from '@/app/fonts';
 
 import '@fortawesome/fontawesome-svg-core/styles.css';
 import {config} from '@fortawesome/fontawesome-svg-core';
-import NavBarComponent from "@components/NavBarComponent";
+import NavBarComponent from "@/components/NavBarComponent";
+import FooterComponent from "@/components/FooterComponent";
+import * as React from "react";
 
 config.autoAddCss = false;
 
@@ -25,6 +27,7 @@ export default function RootLayout({
       >
         <NavBarComponent />
         {children}
+        <FooterComponent />
       </body>
     </html>
   );

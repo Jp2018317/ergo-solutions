@@ -6,7 +6,7 @@ import Detecom from '@public/logo/detecom.webp';
 
 export default async function FooterComponent() {
   return (
-      <footer className='flex max-md:flex-col-reverse items-center justify-around gap-6 bg-secondary-500 w-full h-96 px-4 py-6'>
+      <footer className='flex max-md:flex-col-reverse items-center justify-around gap-6 bg-secondary-500 w-full h-96 px-4 py-6 mt-12'>
         <section className="relative min-w-60 h-full">
           <Link
               href="/"
