@@ -271,7 +271,7 @@ const CarouselPrevious = forwardRef<
             variant={variant}
             size={size}
             className={cn(
-                'absolute h-9 w-9 bg-white/75 dark:bg-black/75 hover:bg-white/75 dark:hover:bg-black/75 shadow-none rounded-full',
+                'absolute h-9 max-sm:h-8 w-9 max-sm:w-8 bg-white/75 dark:bg-black/75 hover:bg-white/75 dark:hover:bg-black/75 shadow-none rounded-full',
                 orientation === 'horizontal'
                     ? 'left-2 max-sm:left-0 top-1/2 -translate-y-1/2'
                     : 'top-2 max-sm:top-0 left-1/2 -translate-x-1/2 rotate-90',
@@ -302,7 +302,7 @@ const CarouselNext = forwardRef<
             variant={variant}
             size={size}
             className={cn(
-                'absolute h-9 w-9 bg-white/75 dark:bg-black/75 hover:bg-white/75 dark:hover:bg-black/75 shadow-none rounded-full',
+                'absolute h-9 max-sm:h-8 w-9 max-sm:w-8 bg-white/75 dark:bg-black/75 hover:bg-white/75 dark:hover:bg-black/75 shadow-none rounded-full',
                 orientation === 'horizontal'
                     ? 'right-2 max-sm:right-0 top-1/2 -translate-y-1/2'
                     : 'bottom-2 max-sm:bottom-0  left-1/2 -translate-x-1/2 rotate-90',

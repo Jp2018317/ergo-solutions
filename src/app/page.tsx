@@ -3,6 +3,7 @@ import Example from '@public/logo/example.jpg';
 import {Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious} from "@components/carousel";
 import * as React from "react";
 import FooterComponent from "@components/FooterComponent";
+import {ImageItem} from "@components/image-item";
 
 export default function Home() {
 
@@ -12,51 +13,36 @@ export default function Home() {
                 {
                     product: {
                         id: 1,
-                        name: 'Negocio 1',
-                        description: 'Descripción del negocio 1',
-                        address: 'Dirección del negocio 1',
-                        phone: '1234567890',
-                        email: '',
+                        name: 'Nombre del Producto 1',
+                        description: 'Descripción del producto 1',
                     }
                 },
                 {
                     product: {
                         id: 2,
-                        name: 'Negocio 1',
-                        description: 'Descripción del negocio 1',
-                        address: 'Dirección del negocio 1',
-                        phone: '1234567890',
-                        email: '',
+                        name: 'Nombre del Producto 2',
+                        description: 'Descripción del producto 2',
                     }
                 },
                 {
                     product: {
                         id: 3,
-                        name: 'Negocio 1',
-                        description: 'Descripción del negocio 1',
-                        address: 'Dirección del negocio 1',
-                        phone: '1234567890',
-                        email: '',
+                        name: 'Nombre del Producto 3',
+                        description: 'Descripción del producto 3',
                     }
                 },
                 {
                     product: {
                         id: 4,
-                        name: 'Negocio 1',
-                        description: 'Descripción del negocio 1',
-                        address: 'Dirección del negocio 1',
-                        phone: '1234567890',
-                        email: '',
+                        name: 'Nombre del Producto 4',
+                        description: 'Descripción del producto 4',
                     }
                 },
                 {
                     product: {
                         id: 5,
-                        name: 'Negocio 1',
-                        description: 'Descripción del negocio 1',
-                        address: 'Dirección del negocio 1',
-                        phone: '1234567890',
-                        email: '',
+                        name: 'Nombre del Producto 5',
+                        description: 'Descripción del producto 5',
                     }
                 }
             ]
@@ -93,7 +79,7 @@ export default function Home() {
 
   return (
       <main className='space-y-14'>
-          <section className='flex flex-col items-center justify-center gap-6 bg-secondary-100 text-white w-full h-96'>
+          <section className='flex flex-col items-center justify-center gap-6 bg-secondary-100 text-white w-full h-96 px-4'>
               <h4 className='max-lg:text-h6 text-center'>Mensaje atractivo publicitando la empresa y sus productos</h4>
               <h1 className='max-lg:text-h4 text-center'>PRODUCTO/SERVICIO</h1>
           </section>
@@ -101,7 +87,7 @@ export default function Home() {
               <div className='w-full max-w-[1200px] text-center'>
                   <h3 className='max-sm:text-h4 max-sm:font-bold'><span className='text-h3 max-sm:text-h4 max-sm:font-bold text-primary-300'>Produtos</span> que podrían interesarte</h3>
               </div>
-                <Carousel
+              <Carousel
                           opts={{
                               align: 'start',
                           }}
@@ -118,7 +104,7 @@ export default function Home() {
                                           role="button"
                                           tabIndex={0}
                                       >
-                                          <div className='size-full bg-secondary-100' />
+                                          <ImageItem alt={'alt'} height={290} width={290} src={Example.src} />
                                       </section>
                                       <section
                                           className="w-full text-center space-y-3"
@@ -126,14 +112,14 @@ export default function Home() {
                                           tabIndex={0}
                                       >
                                           <h6 className="line-clamp-1">{productData.product.name}</h6>
-                                          <p className="w-full line-clamp-2 text-body1">{productData.product.description}</p>
+                                          <p className="w-full line-clamp-2 text-body1 text-secondary-300">{productData.product.description}</p>
                                       </section>
                                   </CarouselItem>
                               ))}
                           </CarouselContent>
                     <CarouselPrevious className='left-10'/>
                     <CarouselNext className='right-10'/>
-                </Carousel>
+              </Carousel>
               <div className='w-full max-w-[1200px] text-center'>
                   <Link variant='default' href='/'>Ver más</Link>
               </div>
