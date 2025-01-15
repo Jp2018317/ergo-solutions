@@ -235,20 +235,19 @@ const CarouselCounter = forwardRef<
             className={cn(
                 'absolute w-full flex justify-center gap-2 max-w-[90%]',
                 orientation === 'horizontal'
-                    ? 'bottom-4 left-1/2 -translate-x-1/2'
-                    : 'left-4 top-1/2 -translate-y-1/2 flex-col',
+                    ? '-bottom-6 left-1/2 -translate-x-1/2'
+                    : '-left-6 top-1/2 -translate-y-1/2 flex-col',
                 className,
             )}
         >
             {Array.from({ length: count }).map((_, index) => (
                 <Button
-
                     key={index}
                     onClick={() => scrollToSelected(index)}
                     variant="ghost"
                     className={cn(
-                        'w-2.5 h-2.5 ring-1 ring-gray-300 rounded-full bg-white/40 dark:bg-white/40 hover:bg-white dark:hover:bg-white p-0',
-                        index + 1 === current && 'bg-white dark:bg-white',
+                        'w-2.5 h-2.5 ring-1 ring-secondary-100 rounded-full bg-secondary-100 hover:bg-primary-500 p-0',
+                        index + 1 === current && 'bg-primary-500 ring-primary-500',
                     )}
                 />
             ))}

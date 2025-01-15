@@ -40,7 +40,7 @@ function ImageItem({
         height={height}
       />
       )}
-      <div data-loading={loading || null} className="w-full h-full bg-secondary-100 animate-pulse hidden data-[loading]:block" />
+      <div data-loading={loading || null} className="w-full h-full bg-secondary-100 rounded-2xl animate-pulse hidden data-[loading]:block" />
     </>
   );
 }
