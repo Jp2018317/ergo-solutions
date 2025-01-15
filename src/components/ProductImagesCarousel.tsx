@@ -1,8 +1,9 @@
 "use client"
 import * as React from 'react';
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import {
     Carousel,
+    CarouselApi,
     CarouselContent,
     CarouselCounter,
     CarouselItem,
@@ -17,13 +18,28 @@ export type ProductImagesCarouselType = {
 }
 
 export default function ProductImagesCarousel({images}: ProductImagesCarouselType) {
+    const [api, setApi] = useState<CarouselApi>();
   const [current, setCurrent] = useState(1);
+    const [count, setCount] = useState(0);
+
+    useEffect(() => {
+        if (!api) {
+            return;
+        }
+        setCount(api.scrollSnapList().length);
+        setCurrent(api.selectedScrollSnap() + 1);
+
+        api.on('select', () => {
+            setCurrent(api.selectedScrollSnap() + 1);
+        });
+    }, [api]);
 
   return (
       <Carousel
           opts={{
               align: 'start',
           }}
+          setApi={setApi}
           className="w-full relative flex items-center max-w-[1200px] px-0 max-sm:mb-5"
       >
           <CarouselContent className="w-full flex ml-0">
@@ -40,9 +56,9 @@ export default function ProductImagesCarousel({images}: ProductImagesCarouselTyp
                   </CarouselItem>
               ))}
           </CarouselContent>
-          <CarouselCounter className='-bottom-4' current={current} setCurrent={setCurrent} count={images.length} />
-          <CarouselPrevious onClick={()=> setCurrent(current - 1)} className='left-10'/>
-          <CarouselNext onClick={()=> setCurrent(current + 1)} className='right-10'/>
+          <CarouselCounter className='-bottom-4' current={current} setCurrent={setCurrent} count={count} />
+          <CarouselPrevious className='left-10'/>
+          <CarouselNext className='right-10'/>
       </Carousel>
   );
 }

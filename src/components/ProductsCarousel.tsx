@@ -1,9 +1,10 @@
 "use client";
 
 import * as React from 'react';
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import {
     Carousel,
+    CarouselApi,
     CarouselContent,
     CarouselCounter,
     CarouselItem,
@@ -20,7 +21,21 @@ export type ProductsCarouselType = {
 }
 
 export default function ProductsCarousel({products, images}: ProductsCarouselType) {
-  const [current, setCurrent] = useState(1);
+    const [api, setApi] = useState<CarouselApi>();
+    const [current, setCurrent] = useState(1);
+    const [count, setCount] = useState(0);
+
+    useEffect(() => {
+        if (!api) {
+            return;
+        }
+        setCount(api.scrollSnapList().length);
+        setCurrent(api.selectedScrollSnap() + 1);
+
+        api.on('select', () => {
+            setCurrent(api.selectedScrollSnap() + 1);
+        });
+    }, [api]);
 
   return (
       <section className='w-full flex flex-col space-y-10 items-center px-4'>
@@ -34,6 +49,7 @@ export default function ProductsCarousel({products, images}: ProductsCarouselTyp
               align: 'start',
             }}
             className="w-full relative flex items-center max-w-[1200px] px-0 "
+            setApi={setApi}
         >
           <CarouselContent className="w-full flex ml-0">
             {(products || []).map((productData, index) => (
@@ -56,9 +72,9 @@ export default function ProductsCarousel({products, images}: ProductsCarouselTyp
                   </CarouselItem>
             ))}
           </CarouselContent>
-          <CarouselCounter current={current} setCurrent={setCurrent} count={images.length} />
-          <CarouselPrevious onClick={()=> setCurrent(current - 1)} className='left-10'/>
-          <CarouselNext onClick={()=> setCurrent(current + 1)} className='right-10'/>
+          <CarouselCounter current={current} setCurrent={setCurrent}  count={count} />
+          <CarouselPrevious className='left-10'/>
+          <CarouselNext className='right-10'/>
         </Carousel>
         <div className='w-full max-w-[1200px] text-center pt-4'>
           <Link className='font-semibold' size='lg' variant='default' href='/productos'>Ver más</Link>
