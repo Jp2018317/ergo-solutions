@@ -1,6 +1,5 @@
 'use client';
 
-import {cn} from '@/lib/utils';
 import Image from 'next/image';
 import {useState} from 'react';
 
@@ -41,16 +40,7 @@ function ImageItem({
         height={height}
       />
       )}
-      <div data-loading={loading || null} className="w-full h-full bg-secondary-100  hidden data-[loading]:block relative overflow-hidden">
-        <div
-          className={cn(
-            'absolute w-[150%] h-[150%]',
-            '-top-full -left-full',
-            'bg-gradient-to-br from-[transparent] from-40% via-white/40 to-60% to-[transparent]',
-            'animate-img-loading',
-          )}
-        />
-      </div>
+      <div data-loading={loading || null} className="w-full h-full bg-secondary-100 rounded-2xl animate-pulse hidden data-[loading]:block" />
     </>
   );
 }

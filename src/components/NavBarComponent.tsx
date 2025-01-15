@@ -1,7 +1,7 @@
-import {Navbar, NavbarContent, NavbarIcon, NavbarNavigation,} from '@/components/ui/navbar';
+import {Navbar, NavbarContent, NavbarIcon, NavbarNavigation,} from '@components/navbar';
 import {Route} from '@/config';
 import * as React from 'react';
-import {Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger,} from "@/components/ui/sheet"
+import {Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger,} from "@components/sheet"
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faBars} from "@fortawesome/free-solid-svg-icons";
 
