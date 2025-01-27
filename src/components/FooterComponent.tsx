@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Link from "next/link";
 import Image from "next/image";
-import Detecom from '@public/logo/detecom.webp';
+import DetecomWhite from '@public/logo/DetecomWhite.webp';
 
 
 export default async function FooterComponent() {
@@ -14,7 +14,7 @@ export default async function FooterComponent() {
             <Image
                 alt="logo"
                 className="w-full max-w-60  h-full object-contain block dark:hidden sm:ml-10"
-                src={Detecom}
+                src={DetecomWhite}
                 fill
             />
           </Link>
