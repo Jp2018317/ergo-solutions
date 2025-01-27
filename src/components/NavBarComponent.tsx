@@ -9,19 +9,14 @@ import {faBars} from "@fortawesome/free-solid-svg-icons";
 export default async function NavBarComponent() {
   const secondaryRoutes = [
     {
-      label: 'ruta 1',
-      key: 'businesses',
+      label: 'Inicio',
+      key: 'inicio',
       routeName: '/',
     },
     {
-      label: 'ruta 2',
-      key: 'events',
-      routeName: '/',
-    },
-    {
-      label: 'ruta 3',
-      key: 'offers',
-      routeName: '/',
+      label: 'Productos',
+      key: 'productos',
+      routeName: '/productos',
     },
   ] satisfies Route[];
 

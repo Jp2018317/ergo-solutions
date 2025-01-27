@@ -117,13 +117,14 @@ export interface NavbarNavigationProps
 
 function NavbarNavigation({ routes, className, variant }: NavbarNavigationProps) {
   const pathname = usePathname();
-  const pathnameSections = pathname.split('/');
+  const pathnameSections = pathname.split('/').filter(section => section !== '')
+  const filteredPathnameSections = pathnameSections.length > 0 ? pathnameSections : ["inicio"];
 
   function getLinkClassNames(isActive: boolean) {
     const base = variant === 'primary' ? 'text-subtitle1' : 'text-subtitle2 relative';
-    const active = `after:absolute after:bg-white after:-bottom-[80%] after:left-0 after:w-full
+    const active = `after:absolute after:bg-white after:-bottom-[70%] after:left-0 after:w-full
                        after:h-[3px] after:rounded-full after:transition-all after:duration-300 after:ease-in-out`;
-    const hover = `hover:after:absolute hover:after:bg-white hover:after:-bottom-[80%] hover:after:left-0 hover:after:w-full
+    const hover = `hover:after:absolute hover:after:bg-white hover:after:-bottom-[70%] hover:after:left-0 hover:after:w-full
                       hover:after:h-[3px] hover:rounded-full hover:after:transition-all hover:after:duration-300 hover:after:ease-in-out`;
     return cn(base, isActive ? active : hover);
   }
@@ -135,7 +136,7 @@ function NavbarNavigation({ routes, className, variant }: NavbarNavigationProps)
           <Link
             href={route.routeName}
           >
-            <span className={getLinkClassNames(pathnameSections.includes(route.key))}>
+            <span className={getLinkClassNames(filteredPathnameSections.includes(route.key))}>
               {route.label}
             </span>
           </Link>
