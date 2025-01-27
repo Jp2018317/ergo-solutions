@@ -43,12 +43,7 @@ export const MAPBOX_ACCESS_TOKEN = process.env.MAPBOX_ACCESS_TOKEN || 'Mapbox Ac
 
 export type RouteNames =
   '/'
-  | '/auth/sign-in'
-  | '/auth/sign-out'
-  | '/search/businesses'
-  | '/search/events'
-  | '/search/offers'
-  | '/example'; // Example route to satisfy eslint in navbar
+  | '/productos';
 
 export type Route = {
   key: string;
