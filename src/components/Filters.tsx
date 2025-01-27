@@ -1,21 +1,20 @@
 "use client";
 
 import * as React from "react";
-import {useRouter, useSearchParams} from "next/navigation";
 
 export default function Filters() {
-    const searchParams = useSearchParams();
-    const router = useRouter();
+    //const searchParams = useSearchParams();
+    //const router = useRouter();
 
-    const [minPrice, setMinPrice] = React.useState(0);
-    const [maxPrice, setMaxPrice] = React.useState(5000);
+    //const [minPrice, setMinPrice] = React.useState(0);
+    //const [maxPrice, setMaxPrice] = React.useState(5000);
 
-    const handlePriceFilter = () => {
-        const params = new URLSearchParams(searchParams.toString());
-        params.set("minPrice", minPrice.toString());
-        params.set("maxPrice", maxPrice.toString());
-        router.push(`?${params.toString()}`);
-    };
+    //const handlePriceFilter = () => {
+    //    const params = new URLSearchParams(searchParams.toString());
+    //    params.set("minPrice", minPrice.toString());
+    //    params.set("maxPrice", maxPrice.toString());
+    //    router.push(`?${params.toString()}`);
+    //};
 
     return (
         <aside className="flex flex-col min-w-64 text-center sm:gap-4">
