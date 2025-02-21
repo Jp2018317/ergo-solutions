@@ -27,6 +27,9 @@
       ],
       "@public/*": [
         "./public/*"
+      ],
+      "@utils/*": [
+        "./src/utils/*"
       ]
     }
   },
