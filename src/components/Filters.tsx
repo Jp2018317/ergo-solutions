@@ -1,59 +1,39 @@
-"use client";
-
 import * as React from "react";
+import {Accordion, AccordionContent, AccordionItem, AccordionTrigger} from "@/components/ui/accordion";
 
-export default function Filters() {
-    //const searchParams = useSearchParams();
-    //const router = useRouter();
-
-    //const [minPrice, setMinPrice] = React.useState(0);
-    //const [maxPrice, setMaxPrice] = React.useState(5000);
-
-    //const handlePriceFilter = () => {
-    //    const params = new URLSearchParams(searchParams.toString());
-    //    params.set("minPrice", minPrice.toString());
-    //    params.set("maxPrice", maxPrice.toString());
-    //    router.push(`?${params.toString()}`);
-    //};
-
+export default function Filters({ main_categories, sub_categories, onChange }: {
+    main_categories: { id: string; name: string }[],
+    sub_categories: { id: string; name: string; main_category_id: string }[],
+    onChange: (filters: any) => void
+}) {
     return (
-        <aside className="flex flex-col min-w-64 text-center sm:gap-4">
-            <h3 className="max-sm:text-[30px]">Productos</h3>
+        <aside className="flex flex-col w-80 min-w-64 text-center sm:gap-4">
+            <h4 className="max-sm:text-[30px]">Categorías</h4>
             <div className="border border-gray-200 rounded-lg p-4">
-                {/*
-                    <span className="font-semibold mb-2">Filtrar por precio</span>
-                    <div className="flex flex-col gap-2 mt-4">
-                        <label className="flex items-center gap-2">
-                            <span>Mínimo:</span>
-                            <input
-                                type="number"
-                                className="border border-gray-300 rounded p-2 w-full"
-                                value={minPrice}
-                                onChange={(e) => setMinPrice(Number(e.target.value))}
-                                min={0}
-                                max={maxPrice}
-                            />
-                        </label>
-                        <label className="flex items-center gap-2">
-                            <span>Máximo:</span>
-                            <input
-                                type="number"
-                                className="border border-gray-300 rounded p-2 w-full"
-                                value={maxPrice}
-                                onChange={(e) => setMaxPrice(Number(e.target.value))}
-                                min={minPrice}
-                                max={5000}
-                            />
-                        </label>
-                        <button
-                            className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 mt-2"
-                            onClick={handlePriceFilter}
-                        >
-                            Aplicar filtro
-                        </button>
-                    </div>
-            */}
+                <Accordion type="single" collapsible>
+                    {main_categories.map((category) => (
+                        <AccordionItem key={category.id} value={category.id}>
+                            <AccordionTrigger>{category.name}</AccordionTrigger>
+                            <AccordionContent>
+                                {sub_categories
+                                    .filter((sub) => sub.main_category_id === category.id)
+                                    .map((subcategory) => (
+                                        <button
+                                            key={subcategory.id}
+                                            onClick={() => onChange({
+                                                main_category: category.name,
+                                                sub_category: subcategory.name
+                                            })}
+                                            className="block w-full text-left text-body2 p-2 hover:bg-gray-100"
+                                        >
+                                            {subcategory.name}
+                                        </button>
+                                    ))}
+                            </AccordionContent>
+                        </AccordionItem>
+                    ))}
+                </Accordion>
             </div>
         </aside>
-);
+    );
 }
