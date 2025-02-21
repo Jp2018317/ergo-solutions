@@ -13,7 +13,7 @@ export default async function Products() {
 
     const { data: filteredProducts, error: filteredError } = await supabase
         .from("products")
-        .select()
+        .select(`*,main_category(*),sub_category(*)`)
         .range(0, 9); // Paginación: primeros 10 productos
 
     const { data: main_categories } = await supabase
