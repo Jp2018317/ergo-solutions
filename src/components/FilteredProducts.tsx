@@ -61,12 +61,12 @@ export default function FilteredProducts({ products, main_categories, sub_catego
     }, [filters]);
 
     return (
-        <div className="w-full flex gap-4">
+        <div className="w-full flex max-md:flex-col gap-4">
             <Filters main_categories={main_categories} sub_categories={sub_categories} onChange={setFilters} />
             {isLoading ? (
                <ImageLoader />
             ) : (
-                <div className="w-full p-10">
+                <div className="w-full md:p-10">
                     {filteredProducts.length > 0 ? (
                         filteredProducts.map((productData) => (
                             <section key={productData.id} className="grid grid-cols-3 max-md:grid-cols-2">
@@ -87,7 +87,7 @@ export default function FilteredProducts({ products, main_categories, sub_catego
                             </section>
                         ))
                     ) : (
-                        <div className="size-full max-h-[30rem] flex items-center justify-center text-center">
+                        <div className="size-full max-h-[30rem] max-md:h-40 flex items-center justify-center text-center">
                             No se encontraron productos
                         </div>
                     )}

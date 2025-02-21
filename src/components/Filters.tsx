@@ -7,7 +7,7 @@ export default function Filters({ main_categories, sub_categories, onChange }: {
     onChange: (filters: { main_category: string, sub_category: string }) => void
 }) {
     return (
-        <aside className="flex flex-col w-80 min-w-64 text-center sm:gap-4">
+        <aside className="flex flex-col w-full md:w-80 min-w-64 text-center sm:gap-4">
             <h4 className="max-sm:text-[30px]">Categorías</h4>
             <div className="border border-gray-200 rounded-lg p-4">
                 <Accordion type="single" collapsible>
