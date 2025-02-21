@@ -4,7 +4,7 @@ import {Accordion, AccordionContent, AccordionItem, AccordionTrigger} from "@/co
 export default function Filters({ main_categories, sub_categories, onChange }: {
     main_categories: { id: string; name: string }[],
     sub_categories: { id: string; name: string; main_category_id: string }[],
-    onChange: (filters: any) => void
+    onChange: (filters: { main_category: string, sub_category: string }) => void
 }) {
     return (
         <aside className="flex flex-col w-80 min-w-64 text-center sm:gap-4">

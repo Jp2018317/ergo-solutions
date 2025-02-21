@@ -3,18 +3,20 @@ import ProductsCarousel from "@/components/ProductsCarousel";
 import Example from "@public/logo/example.jpg";
 import {Button} from "@components/button";
 import ProductImagesCarousel from "@/components/ProductImagesCarousel";
-import {createClient} from "@utils/supabase/server";
-import {PostgrestSingleResponse} from "@supabase/supabase-js";
+import {supabase} from "@/lib/supabase";
 
-export default async function Product({ params }: { params: { id: string } }) {
-    const supabase = await createClient();
-    const { id } = await params;
+interface ProductProps {
+    params: Promise<{ id: string }>
+}
+
+export default async function Product({ params }: ProductProps) {
+    const id = (await params).id
 
     const { data: product } = await supabase
         .from('products')
         .select("*")
         .eq('id', id)
-        .single() as PostgrestSingleResponse<Product>;
+        .single();
 
     const { data: products } = await supabase.from("products").select();
 
@@ -62,7 +64,7 @@ export default async function Product({ params }: { params: { id: string } }) {
                     </aside>
                 </div>
             </div>
-            <ProductsCarousel products={products || []} images={ProductImagesResponse} />
+            <ProductsCarousel products={products || []} />
         </main>
     );
 }

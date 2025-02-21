@@ -31,7 +31,7 @@ export const useFilteredProducts = (initialProducts: Product[]) => {
         };
 
         fetchFilteredProducts();
-    }, [filters]);
+    }, [filters, isFirstRender]);
 
     return { productsData, isLoading, setFilters };
 };

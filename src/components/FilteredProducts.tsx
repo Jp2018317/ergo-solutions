@@ -28,14 +28,11 @@ export default function FilteredProducts({ products, main_categories, sub_catego
 
     useEffect(() => {
         if(isFirstLoad) {
-            console.log({filteredProductsFIRST: filteredProducts})
             setIsFirstLoad(false);
             return;
         }
         const fetchFilteredProducts = async () => {
             setIsLoading(true);
-
-            console.log({ filters });
 
             const query = supabase
                 .from("products")
@@ -50,8 +47,6 @@ export default function FilteredProducts({ products, main_categories, sub_catego
             }
 
             const { data, error } = await query;
-
-            console.log({ data, error });
 
             if (error) {
                 console.error("Error fetching products:", error);

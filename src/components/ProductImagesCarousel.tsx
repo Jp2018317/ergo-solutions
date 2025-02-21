@@ -18,7 +18,7 @@ export type ProductImagesCarouselType = {
 }
 
 export default function ProductImagesCarousel({images}: ProductImagesCarouselType) {
-    const [api, setApi] = useState<CarouselApi>();
+  const [api, setApi] = useState<CarouselApi>();
   const [current, setCurrent] = useState(1);
     const [count, setCount] = useState(0);
 
