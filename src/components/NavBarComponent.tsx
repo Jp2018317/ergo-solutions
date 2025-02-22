@@ -1,9 +1,7 @@
 import {Navbar, NavbarContent, NavbarIcon, NavbarNavigation,} from '@components/navbar';
 import {Route} from '@/config';
 import * as React from 'react';
-import {Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger,} from "@components/sheet"
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faBars} from "@fortawesome/free-solid-svg-icons";
+import SearchBar from "@/components/SearchBar";
 
 
 export default async function NavBarComponent() {
@@ -23,23 +21,9 @@ export default async function NavBarComponent() {
   return (
     <>
         <Navbar>
-          <NavbarContent className="px-3">
+          <NavbarContent className="px-3 gap-6">
             <NavbarIcon />
-            <Sheet>
-              <SheetTrigger>
-                <FontAwesomeIcon className='pr-2' icon={faBars} />
-              </SheetTrigger>
-              <SheetContent>
-                <SheetHeader>
-                  <SheetTitle>Are you absolutely sure?</SheetTitle>
-                  <SheetDescription>
-                    This action cannot be undone. This will permanently delete your account
-                    and remove your data from our servers.
-                  </SheetDescription>
-                </SheetHeader>
-              </SheetContent>
-            </Sheet>
-
+            <SearchBar />
           </NavbarContent>
         </Navbar>
 

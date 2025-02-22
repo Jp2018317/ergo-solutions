@@ -11,7 +11,7 @@ const inputVariants = cva(
   {
     variants: {
       variant: {
-        default: `ring-gray-300 focus-visible:ring-black bg-white dark:ring-gray-500
+        default: `ring-gray-300 focus-visible:ring-primary-200 bg-white dark:ring-gray-500
                   dark:focus-visible:ring-gray-400 dark:bg-black placeholder:text-gray-300`,
         error: `ring-auxiliary-brick bg-white dark:bg-black focus-visible:bg-white dark:focus-visible:bg-black
                 placeholder-shown:bg-auxiliary-brick/[.07] dark:placeholder-shown:bg-auxiliary-brick/[.07]
@@ -39,7 +39,6 @@ const helperVariants = {
            dark:peer-placeholder-shown:bg-black/0 peer-focus:text-caption peer-focus:left-[14px] peer-focus:top-0
            peer-focus:px-1 peer-focus:bg-white dark:peer-focus:bg-black`,
     default: 'peer-focus-visible:text-black dark:peer-focus-visible:text-white',
-    finder: 'text-black',
     error: 'peer-focus-visible:text-auxiliary-brick dark:peer-focus-visible:text-auxiliary-brick',
   },
 };
@@ -55,24 +54,7 @@ export interface InputProps
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
   ({
     className, helperText, icon, label, variant, type, ...props
-  }, ref) => {
-    if (variant === 'finder') {
-      return (
-        <label htmlFor="category" className="text-black dark:text-white pl-[10px] relative flex flex-col gap-0 w-full">
-          <span data-type="input-label" className="text-body2">{label}</span>
-          <input
-            id={props.id}
-            ref={ref}
-            placeholder={props.placeholder}
-            type="text"
-            className={cn('w-full h-full bg-black/0 focus-visible:outline-none text-body1', className)}
-            {...props}
-          />
-        </label>
-      );
-    }
-
-    return (
+  }, ref) => (
       <>
         <div className={`${helperText && variant !== 'error' && 'mb-[10px]'} w-full ${outfit.className} relative z-0`}>
           <input
@@ -87,7 +69,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
                 className,
               },
             ))}
-          ${type === 'search' && `flex placeholder:text-gray-300 ring-2 focus-visible:ring-2 search-cancel:appearance-none
+          ${type === 'search' && `flex placeholder:text-gray-300 search-cancel:appearance-none
                                   search-cancel:bg-xmark-light dark:search-cancel:bg-xmark-dark
                                   search-cancel:h-5 search-cancel:w-3.5 search-cancel:ml-2 ${icon && ' pl-[44px]'}`}
           ${label && 'placeholder:text-opacity-0'} ${icon && type !== 'search' && 'pr-[44px]'}`}
@@ -99,8 +81,8 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
                 helperVariants.iconVariants.base,
                 variant === 'error'
                   ? helperVariants.iconVariants.error : helperVariants.iconVariants.default,
-                type === 'search' && `pointer-events-none text-subtitle1 left-4 text-gray-200 dark:text-gray-400 w-6 h-6 peer-focus:text-gray-200
-              dark:peer-focus:text-gray-200 peer-placeholder-shown:text-gray-200 dark:peer-placeholder-shown:text-gray-400`,
+                type === 'search' && `pointer-events-none text-subtitle1 left-4 text-gray-200 dark:text-gray-400 w-6 h-6 peer-focus:text-primary-300
+               peer-placeholder-shown:text-gray-200`,
               )}
             >
               {icon}
@@ -130,8 +112,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
           </span>
         )}
       </>
-    );
-  },
+    )
 );
 Input.displayName = 'Input';
 

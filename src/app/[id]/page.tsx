@@ -1,8 +1,9 @@
 import * as React from "react";
 import ProductsCarousel from "@/components/ProductsCarousel";
-import {Button} from "@components/button";
 import ProductImagesCarousel from "@/components/ProductImagesCarousel";
 import {supabase} from "@/lib/supabase";
+import ProductModels from "@/components/ProductModels";
+import {WHATSAPP_NUMBER} from "@/config";
 
 interface ProductProps {
     params: Promise<{ id: string }>
@@ -17,11 +18,16 @@ export default async function Product({ params }: ProductProps) {
         .eq('id', id)
         .single();
 
+    const { data: productModels } = await supabase
+        .from('product_models')
+        .select(`*`)
+        .eq('product_id', id)
+
     const { data: products } = await supabase.from("products").select();
 
     return (
-        <main className='space-y-14 divide-y divide-secondary-100/50 [&>section]:sm:pt-14 [&>section]:pt-4'>
-            <div className='flex justify-center mt-4 sm:my-6 px-4'>
+        <main className='space-y-10 sm:space-y-14 divide-y divide-secondary-100/50 [&>section]:sm:pt-14 [&>section]:pt-4'>
+            <section className='flex justify-center px-4 !pt-4'>
                 <div className='w-full flex max-sm:flex-col max-w-[1200px] max-sm:gap-5'>
                     <ProductImagesCarousel product={product} />
                     <aside className='w-full flex flex-col gap-6 justify-between max-sm:items-center sm:p-4'>
@@ -31,10 +37,22 @@ export default async function Product({ params }: ProductProps) {
                                 {product.description}
                             </h6>
                         </div>
-                        <Button size='md' className='w-fit font-semibold'>Consultar</Button>
+                        <a href={`https://api.whatsapp.com/send?phone=${WHATSAPP_NUMBER}`} target="_blank" rel="noreferrer">
+                            <div className={`inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm
+                              font-medium transition-colors focus-visible:outline-none focus-visible:ring-2
+                              focus-visible:ring-action-light-green focus-visible:ring-offset-0 disabled:pointer-events-none text-action
+                              bg-primary-300 bg-[position:_0%_0%] hover:bg-[position:_100%_100%] bg-[size:_200%] 
+                              bg-gradient-to-r from-primary-300 to-primary-200  text-white py-[14px] px-[24px] hover:bg-gradient-to-r 
+                              hover:from-primary-300 hover:to-primary-200 active:bg-gradient-to-r active:from-primary-200 active:to-primary-100
+                              disabled:bg-none disabled:text-gray-400 disabled:bg-gray-100 font-semibold`}
+                            >
+                                Consultar
+                            </div>
+                        </a>
                     </aside>
                 </div>
-            </div>
+            </section>
+            <ProductModels models={productModels || []} />
             <ProductsCarousel products={products || []} />
         </main>
     );
