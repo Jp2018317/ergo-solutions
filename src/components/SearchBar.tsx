@@ -7,6 +7,7 @@ import {debounce} from "lodash";
 import {SearchedProduct} from "@utils/types";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCircleNotch, faSearch} from "@fortawesome/free-solid-svg-icons";
+import {Link} from "@components/link";
 
 export default function SearchBar() {
   const [query, setQuery] = useState("");
@@ -58,8 +59,10 @@ export default function SearchBar() {
               ) : results.length > 0 ? (
                   <ul>
                     {results.map((product) => (
-                        <li key={product.id} className="p-2 hover:bg-gray-100 max-sm:text-caption">
-                          {product.name}
+                        <li key={product.id} className='p-1 flex justify-center'>
+                          <Link variant='subtleLink' href={`/${product.id}`} className="w-full px-2 py-1 hover:bg-gray-100 max-sm:text-caption line-clamp-1">
+                            {product.name}
+                          </Link>
                         </li>
                     ))}
                   </ul>
