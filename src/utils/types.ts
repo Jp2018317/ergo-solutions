@@ -18,6 +18,11 @@ export type Product = {
     sub_category: SubCategory
 }
 
+export type SearchedProduct = {
+    id: string,
+    name: string,
+}
+
 export type ProductModel = {
     model: string;
     max_platform_height: number;
