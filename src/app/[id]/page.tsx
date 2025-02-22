@@ -3,6 +3,7 @@ import ProductsCarousel from "@/components/ProductsCarousel";
 import {Button} from "@components/button";
 import ProductImagesCarousel from "@/components/ProductImagesCarousel";
 import {supabase} from "@/lib/supabase";
+import ProductModels from "@/components/ProductModels";
 
 interface ProductProps {
     params: Promise<{ id: string }>
@@ -17,11 +18,16 @@ export default async function Product({ params }: ProductProps) {
         .eq('id', id)
         .single();
 
+    const { data: productModels } = await supabase
+        .from('product_models')
+        .select(`*`)
+        .eq('product_id', id)
+
     const { data: products } = await supabase.from("products").select();
 
     return (
-        <main className='space-y-14 divide-y divide-secondary-100/50 [&>section]:sm:pt-14 [&>section]:pt-4'>
-            <div className='flex justify-center mt-4 sm:my-6 px-4'>
+        <main className='space-y-10 sm:space-y-14 divide-y divide-secondary-100/50 [&>section]:sm:pt-14 [&>section]:pt-4'>
+            <section className='flex justify-center px-4 !pt-4'>
                 <div className='w-full flex max-sm:flex-col max-w-[1200px] max-sm:gap-5'>
                     <ProductImagesCarousel product={product} />
                     <aside className='w-full flex flex-col gap-6 justify-between max-sm:items-center sm:p-4'>
@@ -34,7 +40,8 @@ export default async function Product({ params }: ProductProps) {
                         <Button size='md' className='w-fit font-semibold'>Consultar</Button>
                     </aside>
                 </div>
-            </div>
+            </section>
+            <ProductModels models={productModels || []} />
             <ProductsCarousel products={products || []} />
         </main>
     );
