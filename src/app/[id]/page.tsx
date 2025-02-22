@@ -31,7 +31,7 @@ export default async function Product({ params }: ProductProps) {
                                 {product.description}
                             </h6>
                         </div>
-                        <Button size='lg' className='w-fit font-semibold'>Consultar</Button>
+                        <Button size='md' className='w-fit font-semibold'>Consultar</Button>
                     </aside>
                 </div>
             </div>
