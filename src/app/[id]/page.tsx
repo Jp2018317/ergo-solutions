@@ -1,6 +1,5 @@
 import * as React from "react";
 import ProductsCarousel from "@/components/ProductsCarousel";
-import Example from "@public/logo/example.jpg";
 import {Button} from "@components/button";
 import ProductImagesCarousel from "@/components/ProductImagesCarousel";
 import {supabase} from "@/lib/supabase";
@@ -14,53 +13,25 @@ export default async function Product({ params }: ProductProps) {
 
     const { data: product } = await supabase
         .from('products')
-        .select("*")
+        .select(`*,main_category(*),sub_category(*)`)
         .eq('id', id)
         .single();
 
     const { data: products } = await supabase.from("products").select();
 
-    const ProductImagesResponse = [
-        {
-            key: '1',
-            name: 'name',
-            src: Example.src,
-        },
-        {
-            key: '2',
-            name: 'name',
-            src: Example.src,
-        },
-        {
-            key: '3',
-            name: 'name',
-            src: Example.src,
-        },
-        {
-            key: '4',
-            name: 'name',
-            src: Example.src,
-        },
-        {
-            key: '5',
-            name: 'name',
-            src: Example.src,
-        },
-    ];
-
     return (
         <main className='space-y-14 divide-y divide-secondary-100/50 [&>section]:sm:pt-14 [&>section]:pt-4'>
             <div className='flex justify-center mt-4 sm:my-6 px-4'>
-                <div className='w-full flex max-sm:flex-col max-w-[1200px]'>
-                    <ProductImagesCarousel images={ProductImagesResponse} />
+                <div className='w-full flex max-sm:flex-col max-w-[1200px] max-sm:gap-5'>
+                    <ProductImagesCarousel product={product} />
                     <aside className='w-full flex flex-col gap-6 justify-between max-sm:items-center sm:p-4'>
                         <div className='w-full flex flex-col max-sm:items-center divide-y divide-secondary-100/50 [&>h6]:pt-6'>
-                            <h3 className='max-sm:text-[30px]'>{product.name}</h3>
-                            <h6 className='text-secondary-400 font-normal max-sm:text-center'>
+                            <h4 className='font-semibold max-sm:text-h6 pb-4 max-sm:text-center'>{product.name}</h4>
+                            <h6 className='text-secondary-400 font-normal max-sm:text-subtitle1'>
                                 {product.description}
                             </h6>
                         </div>
-                        <Button size='lg' className='w-fit font-semibold'>Consultar</Button>
+                        <Button size='md' className='w-fit font-semibold'>Consultar</Button>
                     </aside>
                 </div>
             </div>

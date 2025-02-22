@@ -13,6 +13,7 @@ export type Product = {
     id: string,
     name: string,
     description: string
+    imgAmmount: number
     main_category: MainCategory
     sub_category: SubCategory
 }

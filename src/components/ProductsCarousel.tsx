@@ -83,7 +83,7 @@ export default function ProductsCarousel({products}: ProductsCarouselType) {
           <CarouselNext className='right-10'/>
         </Carousel>
         <div className='w-full max-w-[1200px] text-center pt-4'>
-          <Link className='font-semibold' size='lg' variant='outline' href='/productos'>Ver más</Link>
+          <Link className='font-semibold' size='lg' variant='primary' href='/productos'>Ver más</Link>
         </div>
       </section>
   );

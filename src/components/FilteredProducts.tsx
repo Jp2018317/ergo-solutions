@@ -64,7 +64,13 @@ export default function FilteredProducts({ products, main_categories, sub_catego
         <div className="w-full flex max-md:flex-col gap-4">
             <Filters main_categories={main_categories} sub_categories={sub_categories} onChange={setFilters} />
             {isLoading ? (
-               <ImageLoader />
+                <div className="w-full md:p-10">
+                    <section className="grid grid-cols-3 max-md:grid-cols-2">
+                        <ImageLoader />
+                        <ImageLoader />
+                        <ImageLoader className='max-sm:hidden' />
+                    </section>
+                </div>
             ) : (
                 <div className="w-full md:p-10">
                     {filteredProducts.length > 0 ? (
