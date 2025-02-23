@@ -4,6 +4,7 @@ import ProductImagesCarousel from "@/components/ProductImagesCarousel";
 import {supabase} from "@/lib/supabase";
 import ProductModels from "@/components/ProductModels";
 import {WHATSAPP_NUMBER} from "@/config";
+import {redirect} from "next/navigation";
 
 interface ProductProps {
     params: Promise<{ id: string }>
@@ -12,11 +13,15 @@ interface ProductProps {
 export default async function Product({ params }: ProductProps) {
     const id = (await params).id
 
-    const { data: product } = await supabase
+    const { data: product, error } = await supabase
         .from('products')
         .select(`*,main_category(*),sub_category(*)`)
         .eq('id', id)
         .single();
+
+    if (error || !product) {
+        redirect('/')
+    }
 
     const { data: productModels } = await supabase
         .from('product_models')
@@ -39,7 +44,7 @@ export default async function Product({ params }: ProductProps) {
                         </div>
                         <a href={`https://api.whatsapp.com/send?phone=${WHATSAPP_NUMBER}`} target="_blank" rel="noreferrer">
                             <div className={`inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm
-                              font-medium transition-colors focus-visible:outline-none focus-visible:ring-2
+                              transition-colors focus-visible:outline-none focus-visible:ring-2
                               focus-visible:ring-action-light-green focus-visible:ring-offset-0 disabled:pointer-events-none text-action
                               bg-primary-300 bg-[position:_0%_0%] hover:bg-[position:_100%_100%] bg-[size:_200%] 
                               bg-gradient-to-r from-primary-300 to-primary-200  text-white py-[14px] px-[24px] hover:bg-gradient-to-r 

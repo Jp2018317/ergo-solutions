@@ -12,7 +12,7 @@ export default async function Home() {
               <h4 className='max-lg:text-h6 text-center'>Mensaje atractivo publicitando la empresa y sus productos</h4>
               <h1 className='max-lg:text-h4 text-center'>PRODUCTO/SERVICIO</h1>
           </section>
-          <ProductsCarousel products={products || []} />
+          <ProductsCarousel products={products} />
       </main>
   );
 }

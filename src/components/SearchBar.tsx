@@ -16,8 +16,6 @@ export default function SearchBar() {
 
   // Función para buscar productos en Supabase con debounce
   const fetchProducts = debounce(async (searchTerm: string) => {
-    setLoading(true);
-
     if (!searchTerm) {
       setResults([]);
       setLoading(false);
@@ -31,12 +29,13 @@ export default function SearchBar() {
 
     if (error) console.error(error);
     setResults(data || []);
-    setLoading(false);
   }, 500); // Espera 500ms antes de hacer la petición
 
   // Ejecutar la búsqueda cuando el usuario escriba
   useEffect(() => {
+    setLoading(true);
     fetchProducts(query);
+    setLoading(false);
   }, [query]);
 
   return (

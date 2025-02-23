@@ -15,10 +15,11 @@ import {ImageItem} from "@components/image-item";
 import {Link} from "@components/link";
 import {Product} from "@utils/types";
 import {IMAGES_URL} from "@/config";
+import ImageLoader from "@/components/ImageLoader";
 
 
 export type ProductsCarouselType = {
-  products: Product[]
+  products: Product[] | null
 }
 
 export default function ProductsCarousel({products}: ProductsCarouselType) {
@@ -53,30 +54,40 @@ export default function ProductsCarousel({products}: ProductsCarouselType) {
             setApi={setApi}
         >
           <CarouselContent className="w-full flex ml-0">
-            {(products || []).map((productData, index) => (
-                  <CarouselItem
-                      key={index}
-                      className="flex flex-col gap-5 p-1 px-2 shrink-0 min-[500px]:basis-1/2 md:basis-1/3 items-center"
-                  >
-                    <Link
-                        href={`/${productData.id}`}
-                        className={`relative size-full max-w-72 max-h-72 flex aspect-square items-center justify-center overflow-hidden rounded-[20px]`}
+            {products ? (
+                products.map((productData, index) => (
+                    <CarouselItem
+                        key={index}
+                        className="flex flex-col gap-5 p-1 px-2 shrink-0 min-[500px]:basis-1/2 md:basis-1/3 items-center"
                     >
-                      <ImageItem
-                          alt={'alt'}
-                          height={290}
-                          width={290}
-                          src={`${IMAGES_URL}/${productData.main_category}/${productData.sub_category}/${productData.name}/1.webp`}
-                      />
-                    </Link>
-                    <section
-                        className="w-full text-center space-y-3"
-                    >
-                      <h6 className="line-clamp-1">{productData.name}</h6>
-                      <p className="w-full line-clamp-2 text-body1 text-secondary-300">{productData.description}</p>
+                        <Link
+                            href={`/${productData.id}`}
+                            className={`relative size-full max-w-72 max-h-72 flex aspect-square items-center justify-center overflow-hidden rounded-[20px]`}
+                        >
+                            <ImageItem
+                                alt={'alt'}
+                                height={290}
+                                width={290}
+                                src={`${IMAGES_URL}/${productData.main_category}/${productData.sub_category}/${productData.name}/1.webp`}
+                            />
+                        </Link>
+                        <section
+                            className="w-full text-center space-y-3"
+                        >
+                            <h6 className="line-clamp-1">{productData.name}</h6>
+                            <p className="w-full line-clamp-2 text-body1 text-secondary-300">{productData.description}</p>
+                        </section>
+                    </CarouselItem>
+                )
+            )) : (
+                <div className="w-full">
+                    <section className="grid grid-cols-3 max-md:grid-cols-1 gap-4">
+                        <ImageLoader />
+                        <ImageLoader className='max-md:hidden'/>
+                        <ImageLoader className='max-md:hidden' />
                     </section>
-                  </CarouselItem>
-            ))}
+                </div>
+            )}
           </CarouselContent>
           <CarouselCounter current={current} setCurrent={setCurrent}  count={count} />
           <CarouselPrevious className='left-10'/>
