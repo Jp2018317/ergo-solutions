@@ -8,7 +8,7 @@ import {faBroom} from "@fortawesome/free-solid-svg-icons";
 export default function Filters({ main_categories, sub_categories, onChange, }: {
     main_categories: MainCategory[] | null;
     sub_categories: SubCategory[];
-    onChange: (filters: { main_category: string; sub_category: string }) => void;
+    onChange: (filters: { main_category: string; sub_category: string, page: string }) => void;
 }) {
     const [selectedMainCategory, setSelectedMainCategory] = React.useState("");
     const [selectedSubCategory, setSelectedSubCategory] = React.useState("");
@@ -16,7 +16,7 @@ export default function Filters({ main_categories, sub_categories, onChange, }: 
     const handleSubCategoryClick = (mainCategory: string, subCategory: string) => {
         setSelectedMainCategory(mainCategory);
         setSelectedSubCategory(subCategory);
-        onChange({ main_category: mainCategory, sub_category: subCategory });
+        onChange({ main_category: mainCategory, sub_category: subCategory, page: "1" });
     };
 
     return (
@@ -61,7 +61,7 @@ export default function Filters({ main_categories, sub_categories, onChange, }: 
                 onClick={() => {
                     setSelectedMainCategory("");
                     setSelectedSubCategory("");
-                    onChange({ main_category: "", sub_category: "" });
+                    onChange({ main_category: "", sub_category: "", page: "" });
                 }}
                 className='flex gap-2 items-center justify-center max-md:my-2'
             >

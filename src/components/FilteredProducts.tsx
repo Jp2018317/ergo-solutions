@@ -25,9 +25,10 @@ export default function FilteredProducts({ products, main_categories, sub_catego
 
     const [isFirstLoad, setIsFirstLoad] = useState(true);
     const [isLoading, setIsLoading] = useState(false);
-    const [filters, setFilters] = useState<{ main_category: string; sub_category: string }>({
+    const [filters, setFilters] = useState<{ main_category: string; sub_category: string, page: string }>({
         main_category: "",
         sub_category: "",
+        page: "1",
     });
     const [filteredProducts, setFilteredProducts] = useState<Product[]>(products);
 
@@ -130,7 +131,7 @@ export default function FilteredProducts({ products, main_categories, sub_catego
                                         </Link>
                                         <section className="w-full text-center space-y-3">
                                             <h6 className="line-clamp-2 max-md:text-subtitle1 max-md:font-bold">{productData.name}</h6>
-                                            <p className="w-full line-clamp-2 text-body1 max-md:text-body2 text-secondary-300">{productData.description}</p>
+                                            <p className="w-full max-md:line-clamp-2 line-clamp-1 text-body1 max-md:text-body2 text-secondary-300">{productData.description}</p>
                                         </section>
                                     </div>
                                 ))}
