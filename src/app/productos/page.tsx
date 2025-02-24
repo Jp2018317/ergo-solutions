@@ -14,7 +14,7 @@ export default async function Products() {
     const { data: filteredProducts, error: filteredError } = await supabase
         .from("products")
         .select(`*,main_category(*),sub_category(*)`)
-        .range(0, 9); // Paginación: primeros 10 productos
+        .range(0, 8); // Paginación: primeros 9 productos
 
     const { data: main_categories } = await supabase
         .from("main_categories")
@@ -30,9 +30,9 @@ export default async function Products() {
 
     return (
         <main className="space-y-14 divide-y divide-secondary-100/50 [&>section]:sm:pt-10 [&>section]:pt-4">
-            <section className="flex justify-center gap-2">
+            <section className="h-full flex justify-center gap-2">
                 <div className="w-full flex max-sm:flex-col gap-4 max-w-[1200px] px-4 sm:divide-x divide-secondary-100/50">
-                    <FilteredProducts main_categories={main_categories || []} sub_categories={sub_categories || []} products={filteredProducts || []} />
+                    <FilteredProducts main_categories={main_categories} sub_categories={sub_categories || []} products={filteredProducts || []} />
                 </div>
             </section>
             <ProductsCarousel products={carouselProducts} />
