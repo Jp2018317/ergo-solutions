@@ -4,12 +4,11 @@ import FilteredProducts from "@/components/FilteredProducts";
 import {createClient} from "@utils/supabase/server";
 import {PRODUCTS_PER_PAGE} from "@/config";
 
-export default async function Products({ searchParams }: {
-    searchParams?: { [key: string]: string | string[] | undefined };
-}) {
+export default async function Challenge(props: { searchParams: Promise<{ page: string }> }) {
     const supabase = await createClient();
+    const searchParams = await props.searchParams;
 
-    const page = searchParams?.page ? parseInt(searchParams.page as string) : 1;
+    const page = searchParams?.page ? parseInt(searchParams.page) : 1;
 
     const { data: carouselProducts, error: carouselError } = await supabase
         .from("products")
