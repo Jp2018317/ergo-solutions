@@ -97,12 +97,12 @@ export default function FilteredProducts({ products, main_categories, sub_catego
                     <section className="grid grid-cols-3 max-md:grid-cols-2">
                         <ImageLoader />
                         <ImageLoader />
-                        <ImageLoader className="max-sm:hidden" />
-                        <ImageLoader className="max-sm:hidden" />
-                        <ImageLoader className="max-sm:hidden" />
-                        <ImageLoader className="max-sm:hidden" />
-                        <ImageLoader className="max-sm:hidden" />
-                        <ImageLoader className="max-sm:hidden" />
+                        <ImageLoader />
+                        <ImageLoader />
+                        <ImageLoader />
+                        <ImageLoader />
+                        <ImageLoader />
+                        <ImageLoader />
                         <ImageLoader className="max-sm:hidden" />
                     </section>
                     <div className="pagination w-full flex items-center justify-center gap-2 mt-10">
