@@ -89,6 +89,9 @@ export default function FilteredProducts({ products, main_categories, sub_catego
                         <ImageLoader />
                         <ImageLoader />
                         <ImageLoader className="max-sm:hidden" />
+                        <ImageLoader className="max-sm:hidden" />
+                        <ImageLoader className="max-sm:hidden" />
+                        <ImageLoader className="max-sm:hidden" />
                     </section>
                 </div>
             ) : (
