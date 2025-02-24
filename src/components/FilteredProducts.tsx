@@ -10,6 +10,7 @@ import {IMAGES_URL} from "@/config";
 import {supabase} from "@/lib/supabase";
 import ImageLoader from "@/components/ImageLoader";
 import {Button} from "@components/button";
+import {usePathname, useRouter, useSearchParams} from "next/navigation";
 
 export type ProductsCarouselType = {
     products: Product[];
@@ -18,6 +19,10 @@ export type ProductsCarouselType = {
 };
 
 export default function FilteredProducts({ products, main_categories, sub_categories }: ProductsCarouselType) {
+    const router = useRouter();
+    const pathname = usePathname();
+    const searchParams = useSearchParams();
+
     const [isFirstLoad, setIsFirstLoad] = useState(true);
     const [isLoading, setIsLoading] = useState(false);
     const [filters, setFilters] = useState<{ main_category: string; sub_category: string }>({
@@ -28,7 +33,7 @@ export default function FilteredProducts({ products, main_categories, sub_catego
 
     // Estados para la paginación
     const [currentPage, setCurrentPage] = useState(1);
-    const productsPerPage = 9; // Cambiado a 9 productos
+    const productsPerPage = 9;
 
     useEffect(() => {
         if (isFirstLoad) {
@@ -42,7 +47,7 @@ export default function FilteredProducts({ products, main_categories, sub_catego
             let query = supabase
                 .from("products")
                 .select(`*, main_category(*), sub_category(*)`)
-                .range((currentPage - 1) * productsPerPage, currentPage * productsPerPage - 1); // Ajustar rango según la página
+                .range((currentPage - 1) * productsPerPage, currentPage * productsPerPage - 1);
 
             if (filters.main_category) {
                 query = query.eq("main_category", filters.main_category);
@@ -51,6 +56,11 @@ export default function FilteredProducts({ products, main_categories, sub_catego
             if (filters.sub_category) {
                 query = query.eq("sub_category", filters.sub_category);
             }
+
+            const params = new URLSearchParams(searchParams.toString());
+            params.set("main_category", filters.main_category);
+            params.set("sub_category", filters.sub_category);
+            router.push(pathname + '?' + params.toString());
 
             const { data, error } = await query;
 
@@ -64,12 +74,10 @@ export default function FilteredProducts({ products, main_categories, sub_catego
         };
 
         fetchFilteredProducts();
-    }, [filters, currentPage]); // Añadido currentPage a las dependencias
+    }, [filters, currentPage]);
 
-    // Calcular los productos para la página actual
     const currentProducts = filteredProducts;
 
-    // Funciones de paginación
     const nextPage = () => {
         setCurrentPage(currentPage + 1);
     };
@@ -92,12 +100,23 @@ export default function FilteredProducts({ products, main_categories, sub_catego
                         <ImageLoader className="max-sm:hidden" />
                         <ImageLoader className="max-sm:hidden" />
                         <ImageLoader className="max-sm:hidden" />
+                        <ImageLoader className="max-sm:hidden" />
+                        <ImageLoader className="max-sm:hidden" />
+                        <ImageLoader className="max-sm:hidden" />
                     </section>
+                    <div className="pagination w-full flex items-center justify-center gap-2 mt-10">
+                        <Button disabled>
+                            Anterior
+                        </Button>
+                        <span className="px-4 text-lg">{currentPage}</span>
+                        <Button disabled>
+                            Siguiente
+                        </Button>
+                    </div>
                 </div>
             ) : (
                 <div className="size-full md:p-10">
                     {currentProducts.length > 0 ? (
-                        <>
                             <section className="grid grid-cols-3 max-md:grid-cols-2">
                                 {currentProducts.map((productData) => (
                                     <div key={productData.id} className="flex flex-col gap-5 p-1 px-2 shrink-0 min-[500px]:basis-1/2 md:basis-1/3 items-center">
@@ -116,23 +135,21 @@ export default function FilteredProducts({ products, main_categories, sub_catego
                                     </div>
                                 ))}
                             </section>
-
-                            {/* Controles de paginación */}
-                            <div className="pagination w-full flex items-center justify-center gap-2 mt-10">
-                                <Button onClick={prevPage} disabled={currentPage === 1}>
-                                    Anterior
-                                </Button>
-                                <span className="px-4 text-lg">{currentPage}</span>
-                                <Button onClick={nextPage} disabled={currentProducts.length < productsPerPage}>
-                                    Siguiente
-                                </Button>
-                            </div>
-                        </>
                     ) : (
                         <div className="size-full max-h-[40rem] max-md:h-40 flex items-center justify-center text-center">
                             No se encontraron productos
                         </div>
                     )}
+
+                    <div className="pagination w-full flex items-center justify-center gap-2 mt-10">
+                        <Button onClick={prevPage} disabled={currentPage === 1}>
+                            Anterior
+                        </Button>
+                        <span className="px-4 text-lg">{currentPage}</span>
+                        <Button onClick={nextPage} disabled={currentProducts.length < productsPerPage}>
+                            Siguiente
+                        </Button>
+                    </div>
                 </div>
             )}
         </div>
