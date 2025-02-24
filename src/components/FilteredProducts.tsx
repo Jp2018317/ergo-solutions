@@ -61,7 +61,7 @@ export default function FilteredProducts({ products, main_categories, sub_catego
 
     return (
         <div className="size-full flex max-md:flex-col gap-4">
-            <Filters main_categories={main_categories} sub_categories={sub_categories} onChange={setFilters} />
+            <Filters main_categories={main_categories || []} sub_categories={sub_categories} onChange={setFilters} />
             {isLoading ? (
                 <div className="w-full md:p-10">
                     <section className="grid grid-cols-3 max-md:grid-cols-2">
