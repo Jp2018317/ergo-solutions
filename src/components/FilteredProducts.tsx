@@ -6,7 +6,7 @@ import {MainCategory, Product, SubCategory} from "@utils/types";
 import {Link} from "@components/link";
 import {ImageItem} from "@components/image-item";
 import Filters from "./Filters";
-import {IMAGES_URL} from "@/config";
+import {IMAGES_URL, PRODUCTS_PER_PAGE} from "@/config";
 import {supabase} from "@/lib/supabase";
 import ImageLoader from "@/components/ImageLoader";
 import {Button} from "@components/button";
@@ -32,8 +32,7 @@ export default function FilteredProducts({ products, main_categories, sub_catego
     const [filteredProducts, setFilteredProducts] = useState<Product[]>(products);
 
     // Estados para la paginación
-    const [currentPage, setCurrentPage] = useState(1);
-    const productsPerPage = 9;
+    const [currentPage, setCurrentPage] = useState(searchParams.get("page") ? parseInt(searchParams.get("page") as string) : 1);
 
     useEffect(() => {
         if (isFirstLoad) {
@@ -47,7 +46,7 @@ export default function FilteredProducts({ products, main_categories, sub_catego
             let query = supabase
                 .from("products")
                 .select(`*, main_category(*), sub_category(*)`)
-                .range((currentPage - 1) * productsPerPage, currentPage * productsPerPage - 1);
+                .range((currentPage - 1) * PRODUCTS_PER_PAGE, currentPage * PRODUCTS_PER_PAGE - 1);
 
             if (filters.main_category) {
                 query = query.eq("main_category", filters.main_category);
@@ -60,6 +59,7 @@ export default function FilteredProducts({ products, main_categories, sub_catego
             const params = new URLSearchParams(searchParams.toString());
             params.set("main_category", filters.main_category);
             params.set("sub_category", filters.sub_category);
+            params.set("page", currentPage.toString());
             router.push(pathname + '?' + params.toString());
 
             const { data, error } = await query;
@@ -146,7 +146,7 @@ export default function FilteredProducts({ products, main_categories, sub_catego
                             Anterior
                         </Button>
                         <span className="px-4 text-lg">{currentPage}</span>
-                        <Button onClick={nextPage} disabled={currentProducts.length < productsPerPage}>
+                        <Button onClick={nextPage} disabled={currentProducts.length < PRODUCTS_PER_PAGE}>
                             Siguiente
                         </Button>
                     </div>

@@ -2,9 +2,14 @@ import * as React from "react";
 import ProductsCarousel from "@/components/ProductsCarousel";
 import FilteredProducts from "@/components/FilteredProducts";
 import {createClient} from "@utils/supabase/server";
+import {PRODUCTS_PER_PAGE} from "@/config";
 
-export default async function Products() {
+export default async function Products({ searchParams }: {
+    searchParams?: { [key: string]: string | string[] | undefined };
+}) {
     const supabase = await createClient();
+
+    const page = searchParams?.page ? parseInt(searchParams.page as string) : 1;
 
     const { data: carouselProducts, error: carouselError } = await supabase
         .from("products")
@@ -13,8 +18,8 @@ export default async function Products() {
 
     const { data: filteredProducts, error: filteredError } = await supabase
         .from("products")
-        .select(`*,main_category(*),sub_category(*)`)
-        .range(0, 8); // Paginación: primeros 9 productos
+        .select(`*, main_category(*), sub_category(*)`)
+        .range((page - 1) * PRODUCTS_PER_PAGE, page * PRODUCTS_PER_PAGE - 1);
 
     const { data: main_categories } = await supabase
         .from("main_categories")
