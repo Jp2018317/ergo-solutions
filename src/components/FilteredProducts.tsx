@@ -12,7 +12,7 @@ import ImageLoader from "@/components/ImageLoader";
 
 export type ProductsCarouselType = {
     products: Product[];
-    main_categories: MainCategory[];
+    main_categories: MainCategory[] | null;
     sub_categories: SubCategory[];
 };
 
@@ -52,7 +52,6 @@ export default function FilteredProducts({ products, main_categories, sub_catego
                 console.error("Error fetching products:", error);
             } else {
                 setFilteredProducts(data || []);
-                console.log({filteredProducts})
             }
 
             setIsLoading(false);
@@ -61,8 +60,8 @@ export default function FilteredProducts({ products, main_categories, sub_catego
     }, [filters]);
 
     return (
-        <div className="w-full flex max-md:flex-col gap-4">
-            <Filters main_categories={main_categories} sub_categories={sub_categories} onChange={setFilters} />
+        <div className="size-full flex max-md:flex-col gap-4">
+            <Filters main_categories={main_categories || []} sub_categories={sub_categories} onChange={setFilters} />
             {isLoading ? (
                 <div className="w-full md:p-10">
                     <section className="grid grid-cols-3 max-md:grid-cols-2">
@@ -72,11 +71,11 @@ export default function FilteredProducts({ products, main_categories, sub_catego
                     </section>
                 </div>
             ) : (
-                <div className="w-full md:p-10">
+                <div className="size-full md:p-10">
                     {filteredProducts.length > 0 ? (
-                        filteredProducts.map((productData) => (
-                            <section key={productData.id} className="grid grid-cols-3 max-md:grid-cols-2">
-                                <div className="flex flex-col gap-5 p-1 px-2 shrink-0 min-[500px]:basis-1/2 md:basis-1/3 items-center">
+                        <section className="grid grid-cols-3 max-md:grid-cols-2">
+                            {filteredProducts.map((productData) => (
+                                <div key={productData.id} className="flex flex-col gap-5 p-1 px-2 shrink-0 min-[500px]:basis-1/2 md:basis-1/3 items-center">
                                     <Link href={`/${productData.id}`} className="relative size-full max-w-72 max-h-72 flex aspect-square items-center justify-center overflow-hidden rounded-[20px]">
                                         <ImageItem
                                             alt={productData.name}
@@ -90,10 +89,10 @@ export default function FilteredProducts({ products, main_categories, sub_catego
                                         <p className="w-full line-clamp-2 text-body1 text-secondary-300">{productData.description}</p>
                                     </section>
                                 </div>
-                            </section>
-                        ))
+                            ))}
+                        </section>
                     ) : (
-                        <div className="size-full max-h-[30rem] max-md:h-40 flex items-center justify-center text-center">
+                        <div className="size-full max-h-[40rem] max-md:h-40 flex items-center justify-center text-center">
                             No se encontraron productos
                         </div>
                     )}

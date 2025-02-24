@@ -35,7 +35,7 @@ export default async function Products() {
                     <FilteredProducts main_categories={main_categories || []} sub_categories={sub_categories || []} products={filteredProducts || []} />
                 </div>
             </section>
-            <ProductsCarousel products={carouselProducts || []} />
+            <ProductsCarousel products={carouselProducts} />
         </main>
     );
 }
