@@ -25,7 +25,7 @@ export default function SearchBar() {
         .from("products")
         .select("id, name")
         .ilike("name", `%${searchTerm}%`) // Búsqueda insensible a mayúsculas/minúsculas
-        .limit(3); // Límite de resultados
+        .limit(5); // Límite de resultados
 
     if (error) console.error(error);
     setResults(data || []);
@@ -59,7 +59,7 @@ export default function SearchBar() {
                   <ul>
                     {results.map((product) => (
                         <li key={product.id} className='p-1 flex justify-center'>
-                          <Link variant='subtleLink' href={`/${product.id}`} className="w-full px-2 py-1 hover:bg-gray-100 max-sm:text-caption line-clamp-1">
+                          <Link onClick={() => setQuery("")} variant='subtleLink' href={`/${product.id}`} className="w-full text-wrap px-2 py-1 hover:bg-gray-100 max-sm:text-caption line-clamp-1">
                             {product.name}
                           </Link>
                         </li>

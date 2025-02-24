@@ -61,7 +61,7 @@ export default function Filters({ main_categories, sub_categories, onChange, }: 
                 onClick={() => {
                     setSelectedMainCategory("");
                     setSelectedSubCategory("");
-                    onChange({ main_category: "", sub_category: "", page: "" });
+                    onChange({ main_category: "", sub_category: "", page: "1" });
                 }}
                 className='flex gap-2 items-center justify-center max-md:my-2'
             >

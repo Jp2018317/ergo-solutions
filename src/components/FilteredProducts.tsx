@@ -60,8 +60,10 @@ export default function FilteredProducts({ products, main_categories, sub_catego
             const params = new URLSearchParams(searchParams.toString());
             params.set("main_category", filters.main_category);
             params.set("sub_category", filters.sub_category);
-            params.set("page", currentPage.toString());
+            params.set("page", filters.page);
             router.push(pathname + '?' + params.toString());
+            
+            setCurrentPage(parseInt(filters.page));
 
             const { data, error } = await query;
 
@@ -97,12 +99,12 @@ export default function FilteredProducts({ products, main_categories, sub_catego
                     <section className="grid grid-cols-3 max-md:grid-cols-2">
                         <ImageLoader />
                         <ImageLoader />
-                        <ImageLoader className="max-sm:hidden" />
-                        <ImageLoader className="max-sm:hidden" />
-                        <ImageLoader className="max-sm:hidden" />
-                        <ImageLoader className="max-sm:hidden" />
-                        <ImageLoader className="max-sm:hidden" />
-                        <ImageLoader className="max-sm:hidden" />
+                        <ImageLoader />
+                        <ImageLoader />
+                        <ImageLoader />
+                        <ImageLoader />
+                        <ImageLoader />
+                        <ImageLoader />
                         <ImageLoader className="max-sm:hidden" />
                     </section>
                     <div className="pagination w-full flex items-center justify-center gap-2 mt-10">

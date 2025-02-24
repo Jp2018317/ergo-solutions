@@ -28,7 +28,7 @@ export default async function Product({ params }: ProductProps) {
         .select(`*`)
         .eq('product_id', id)
 
-    const { data: products } = await supabase.from("products").select();
+    const { data: products } = await supabase.from("products").select().limit(6);
 
     return (
         <main className='space-y-10 sm:space-y-14 divide-y divide-secondary-100/50 [&>section]:sm:pt-14 [&>section]:pt-4'>
