@@ -129,8 +129,8 @@ export default function FilteredProducts({ products, main_categories, sub_catego
                                             />
                                         </Link>
                                         <section className="w-full text-center space-y-3">
-                                            <h6 className="line-clamp-1">{productData.name}</h6>
-                                            <p className="w-full line-clamp-2 text-body1 text-secondary-300">{productData.description}</p>
+                                            <h6 className="line-clamp-2 max-md:text-subtitle1 max-md:font-bold">{productData.name}</h6>
+                                            <p className="w-full line-clamp-2 text-body1 max-md:text-body2 text-secondary-300">{productData.description}</p>
                                         </section>
                                     </div>
                                 ))}
