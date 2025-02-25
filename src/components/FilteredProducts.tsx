@@ -33,7 +33,8 @@ export default function FilteredProducts({ products, main_categories, sub_catego
     const [filteredProducts, setFilteredProducts] = useState<Product[]>(products);
 
     // Estados para la paginación
-    const [currentPage, setCurrentPage] = useState(searchParams.get("page") ? parseInt(searchParams.get("page") as string) : 1);
+    const initialPage = searchParams.get("page")
+    const [currentPage, setCurrentPage] = useState(initialPage ? parseInt(initialPage) : 1);
 
     useEffect(() => {
         if (isFirstLoad) {
@@ -62,7 +63,7 @@ export default function FilteredProducts({ products, main_categories, sub_catego
             params.set("sub_category", filters.sub_category);
             params.set("page", filters.page);
             router.push(pathname + '?' + params.toString());
-            
+
             setCurrentPage(parseInt(filters.page));
 
             const { data, error } = await query;
@@ -83,17 +84,19 @@ export default function FilteredProducts({ products, main_categories, sub_catego
 
     const nextPage = () => {
         setCurrentPage(currentPage + 1);
+        setFilters({ ...filters, page: (currentPage + 1).toString() });
     };
 
     const prevPage = () => {
         if (currentPage > 1) {
             setCurrentPage(currentPage - 1);
+            setFilters({ ...filters, page: (currentPage - 1).toString() });
         }
     };
 
     return (
         <div className="size-full flex max-md:flex-col gap-4">
-            <Filters main_categories={main_categories || []} sub_categories={sub_categories} onChange={setFilters} />
+            <Filters main_categories={main_categories || []} sub_categories={sub_categories} current_page={currentPage} onChange={setFilters} />
             {isLoading ? (
                 <div className="w-full md:p-10">
                     <section className="grid grid-cols-3 max-md:grid-cols-2">

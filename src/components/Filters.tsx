@@ -5,9 +5,10 @@ import {Button} from "@components/button";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faBroom} from "@fortawesome/free-solid-svg-icons";
 
-export default function Filters({ main_categories, sub_categories, onChange, }: {
+export default function Filters({ main_categories, sub_categories, current_page, onChange, }: {
     main_categories: MainCategory[] | null;
     sub_categories: SubCategory[];
+    current_page: number;
     onChange: (filters: { main_category: string; sub_category: string, page: string }) => void;
 }) {
     const [selectedMainCategory, setSelectedMainCategory] = React.useState("");
@@ -16,7 +17,7 @@ export default function Filters({ main_categories, sub_categories, onChange, }: 
     const handleSubCategoryClick = (mainCategory: string, subCategory: string) => {
         setSelectedMainCategory(mainCategory);
         setSelectedSubCategory(subCategory);
-        onChange({ main_category: mainCategory, sub_category: subCategory, page: "1" });
+        onChange({ main_category: mainCategory, sub_category: subCategory, page: current_page.toString() });
     };
 
     return (
