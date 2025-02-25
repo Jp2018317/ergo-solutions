@@ -35,7 +35,6 @@ export default function FilteredProducts({ products, main_categories, sub_catego
     // Estados para la paginación
     const initialPage = searchParams.get("page")
     const [currentPage, setCurrentPage] = useState(initialPage ? parseInt(initialPage) : 1);
-    console.log({currentPage});
 
     useEffect(() => {
         if (isFirstLoad) {
@@ -62,7 +61,6 @@ export default function FilteredProducts({ products, main_categories, sub_catego
             const params = new URLSearchParams(searchParams.toString());
             params.set("main_category", filters.main_category);
             params.set("sub_category", filters.sub_category);
-            console.log("filters.page", filters.page);
             params.set("page", filters.page);
             router.push(pathname + '?' + params.toString());
 
