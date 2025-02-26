@@ -23,7 +23,7 @@ export default async function FooterComponent() {
             />
           </Link>
         </section>
-        <section className='w-full flex justify-center md:justify-end max-md:pt-10 max-w-[1150px] max-xl:max-w-[750px] max-lg:max-w-[600px]'>
+        <section className='flex justify-center md:justify-end max-md:pt-10 max-w-[1150px] max-xl:max-w-[750px] max-lg:max-w-[600px]'>
           <div className='flex flex-col justify-center items-center text-white text-center gap-4 sm:mr-10'>
             <h6 className='font-bold mb-2 max-sm:text-action'>Contacto:</h6>
             <div className='flex gap-2'>
