@@ -40,7 +40,7 @@ export default function ProductsCarousel({products}: ProductsCarouselType) {
     }, [api]);
 
   return (
-      <section className='w-full flex flex-col space-y-10 items-center px-4'>
+      <section className='w-full flex flex-col space-y-10 items-center px-4 py-6 sm:py-10'>
         <div className='w-full max-w-[1200px] text-center'>
           <h3 className='max-sm:text-h4 max-sm:font-bold'><span
               className='text-h3 max-sm:text-h4 max-sm:font-bold text-primary-300'>Productos</span> que podrían

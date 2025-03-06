@@ -62,7 +62,7 @@ export default function FilteredProducts({ products, main_categories, sub_catego
             params.set("main_category", filters.main_category);
             params.set("sub_category", filters.sub_category);
             params.set("page", filters.page);
-            router.push(pathname + '?' + params.toString());
+            router.push(pathname + '?' + params.toString(), {scroll: false});
 
             setCurrentPage(parseInt(filters.page));
 
@@ -96,19 +96,13 @@ export default function FilteredProducts({ products, main_categories, sub_catego
 
     return (
         <div className="size-full flex max-md:flex-col gap-4">
-            <Filters main_categories={main_categories || []} sub_categories={sub_categories} current_page={currentPage} onChange={setFilters} />
+            <Filters main_categories={main_categories || []} sub_categories={sub_categories} onChange={setFilters} />
             {isLoading ? (
                 <div className="w-full md:p-10">
-                    <section className="grid grid-cols-3 max-md:grid-cols-2">
-                        <ImageLoader />
-                        <ImageLoader />
-                        <ImageLoader />
-                        <ImageLoader />
-                        <ImageLoader />
-                        <ImageLoader />
-                        <ImageLoader />
-                        <ImageLoader />
-                        <ImageLoader className="max-sm:hidden" />
+                    <section className="grid grid-cols-3 max-md:grid-cols-2 gap-4">
+                        {Array.from({ length: PRODUCTS_PER_PAGE }).map((_, index) => (
+                            <ImageLoader key={index} />
+                        ))}
                     </section>
                     <div className="pagination w-full flex items-center justify-center gap-2 mt-10">
                         <Button disabled>
@@ -135,8 +129,8 @@ export default function FilteredProducts({ products, main_categories, sub_catego
                                             />
                                         </Link>
                                         <section className="w-full text-center space-y-3">
-                                            <h6 className="line-clamp-2 max-md:text-subtitle1 max-md:font-bold">{productData.name}</h6>
-                                            <p className="w-full max-md:line-clamp-2 line-clamp-1 text-body1 max-md:text-body2 text-secondary-300">{productData.description}</p>
+                                            <h6 className="line-clamp-2 max-md:line-clamp-3 max-md:text-subtitle1 max-md:font-bold">{productData.name}</h6>
+                                            <p className="w-full line-clamp-2 text-body1 max-md:text-body2 text-secondary-300">{productData.description}</p>
                                         </section>
                                     </div>
                                 ))}

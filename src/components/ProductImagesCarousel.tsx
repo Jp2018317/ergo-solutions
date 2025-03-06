@@ -12,7 +12,7 @@ import {
 } from "@components/carousel";
 import {ImageItem} from "@components/image-item";
 import {Product} from "@utils/types";
-import {IMAGES_URL} from "@/config"; // Asegúrate de importar supabase
+import {IMAGES_URL} from "@/config";
 
 export type ProductImagesCarouselType = {
     product: Product

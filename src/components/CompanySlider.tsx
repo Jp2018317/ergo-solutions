@@ -3,7 +3,7 @@ import {Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious}
 
 export default function CompanySlider() {
     return(
-        <section className='size-full flex flex-col items-center justify-center px-4 bg-secondary-100/25 min-h-96'>
+        <section className='size-full flex flex-col items-center justify-center px-4 bg-secondary-100/25 min-h-[500px]'>
             <Carousel className="w-full relative flex items-center max-w-[1200px] px-0 ">
                 <CarouselContent className="size-full flex ml-0 items-center max-w-[1200px]">
                     <CarouselItem className="flex flex-col gap-5 p-1 px-2 shrink-0 items-center">

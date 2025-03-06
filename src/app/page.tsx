@@ -8,9 +8,9 @@ export default async function Home() {
     const { data: products } = await supabase.from("products").select().limit(6);
 
   return (
-      <main className='space-y-14 flex flex-col items-center w-full'>
-          <CompanySlider />
+      <main className='flex flex-col items-center w-full'>
           <ProductsCarousel products={products} />
+          <CompanySlider />
       </main>
   );
 }
