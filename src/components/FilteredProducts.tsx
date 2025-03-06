@@ -62,7 +62,7 @@ export default function FilteredProducts({ products, main_categories, sub_catego
             params.set("main_category", filters.main_category);
             params.set("sub_category", filters.sub_category);
             params.set("page", filters.page);
-            router.push(pathname + '?' + params.toString());
+            router.push(pathname + '?' + params.toString(), {scroll: false});
 
             setCurrentPage(parseInt(filters.page));
 
@@ -96,7 +96,7 @@ export default function FilteredProducts({ products, main_categories, sub_catego
 
     return (
         <div className="size-full flex max-md:flex-col gap-4">
-            <Filters main_categories={main_categories || []} sub_categories={sub_categories} current_page={currentPage} onChange={setFilters} />
+            <Filters main_categories={main_categories || []} sub_categories={sub_categories} onChange={setFilters} />
             {isLoading ? (
                 <div className="w-full md:p-10">
                     <section className="grid grid-cols-3 max-md:grid-cols-2 gap-4">
