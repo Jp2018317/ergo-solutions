@@ -21,7 +21,7 @@ export default function Filters({ main_categories, sub_categories, onChange, }: 
 
     return (
         <aside className="flex flex-col w-full md:w-80 min-w-64 text-center sm:gap-4">
-            <h4 className="max-sm:text-[25px] font-semibold">Categorías</h4>
+            <h4 className="max-sm:text-[25px] font-semibold pb-2">Categorías</h4>
             <div className="border border-gray-200 rounded-lg px-4">
                 <Accordion type="single" collapsible>
                     {main_categories ? (

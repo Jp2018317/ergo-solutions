@@ -33,8 +33,8 @@ export default async function Challenge(props: { searchParams: Promise<{ page: s
     }
 
     return (
-        <main className="space-y-14 divide-y divide-secondary-100/50 [&>section]:sm:pt-10 [&>section]:pt-4">
-            <section className="h-full flex justify-center gap-2">
+        <main className="space-y-14 divide-y divide-secondary-100/50 [&>section]:sm:pt-10 [&>section]:pt-2">
+            <section className="h-full flex justify-center">
                 <div className="w-full flex max-sm:flex-col gap-4 max-w-[1200px] px-4 sm:divide-x divide-secondary-100/50">
                     <FilteredProducts main_categories={main_categories} sub_categories={sub_categories || []} products={filteredProducts || []} />
                 </div>
