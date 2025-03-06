@@ -5,6 +5,7 @@ import {supabase} from "@/lib/supabase";
 import ProductModels from "@/components/ProductModels";
 import {WHATSAPP_NUMBER} from "@/config";
 import {redirect} from "next/navigation";
+import ProductSpecifications from "@/components/ProductSpecifications";
 
 interface ProductProps {
     params: Promise<{ id: string }>
@@ -60,6 +61,11 @@ export default async function Product({ params }: ProductProps) {
             {
                 productModels && productModels?.length > 0 && (
                     <ProductModels models={productModels} />
+                )
+            }
+            {
+                product.specifications && (
+                    <ProductSpecifications specifications={product.specifications} />
                 )
             }
             <ProductsCarousel products={products || []} />
