@@ -6,6 +6,7 @@ import ProductModels from "@/components/ProductModels";
 import {WHATSAPP_NUMBER} from "@/config";
 import {redirect} from "next/navigation";
 import ProductSpecifications from "@/components/ProductSpecifications";
+import BreadCrumbs from "@/components/BreadCrumbs";
 
 interface ProductProps {
     params: Promise<{ id: string }>
@@ -36,12 +37,15 @@ export default async function Product({ params }: ProductProps) {
             <section className='flex justify-center px-4 !pt-4 md:min-h-[500px]'>
                 <div className='w-full flex max-sm:flex-col max-w-[1200px] max-sm:gap-5'>
                     <ProductImagesCarousel product={product} />
-                    <aside className='w-full flex flex-col gap-6 justify-between max-sm:items-center sm:p-4'>
-                        <div className='w-full flex flex-col max-sm:items-center divide-y divide-secondary-100/50 [&>p]:pt-6'>
-                            <h4 className='font-semibold max-sm:text-h6 pb-4 max-sm:text-center'>{product.name}</h4>
-                            <p className='text-secondary-400 font-normal text-subtitle1 text- max-sm:text-subtitle1'>
-                                {product.description}
-                            </p>
+                    <aside className='w-full flex flex-col justify-between max-sm:items-center sm:p-4'>
+                        <div className='size-full flex flex-col'>
+                            <BreadCrumbs main_category={product.main_category} sub_category={product.sub_category}  />
+                            <div className='w-full flex flex-col max-sm:items-center divide-y divide-secondary-100/50 [&>p]:py-6'>
+                                <h4 className='font-semibold max-sm:text-h6 pb-4 py-2 max-sm:text-center'>{product.name}</h4>
+                                <p className='text-secondary-400 font-normal text-subtitle1 text- max-sm:text-subtitle1'>
+                                    {product.description}
+                                </p>
+                            </div>
                         </div>
                         <a href={`https://api.whatsapp.com/send?phone=${WHATSAPP_NUMBER}`} target="_blank" rel="noreferrer">
                             <div className={`inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm

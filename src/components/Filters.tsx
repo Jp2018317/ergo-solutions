@@ -4,14 +4,16 @@ import {MainCategory, SubCategory} from "@utils/types";
 import {Button} from "@components/button";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faBroom} from "@fortawesome/free-solid-svg-icons";
+import {SetFiltersType} from "./FilteredProducts";
 
-export default function Filters({ main_categories, sub_categories, onChange, }: {
+export default function Filters({ main_categories, sub_categories, onChange, initialFilters }: {
     main_categories: MainCategory[] | null;
-    sub_categories: SubCategory[];
+    sub_categories: SubCategory[] | null;
     onChange: (filters: { main_category: string; sub_category: string, page: string }) => void;
+    initialFilters: SetFiltersType;
 }) {
-    const [selectedMainCategory, setSelectedMainCategory] = React.useState("");
-    const [selectedSubCategory, setSelectedSubCategory] = React.useState("");
+    const [selectedMainCategory, setSelectedMainCategory] = React.useState(initialFilters.main_category);
+    const [selectedSubCategory, setSelectedSubCategory] = React.useState(initialFilters.sub_category);
 
     const handleSubCategoryClick = (mainCategory: string, subCategory: string) => {
         setSelectedMainCategory(mainCategory);
@@ -23,17 +25,17 @@ export default function Filters({ main_categories, sub_categories, onChange, }: 
         <aside className="flex flex-col w-full md:w-80 min-w-64 text-center sm:gap-4">
             <h4 className="max-sm:text-[25px] font-semibold pb-2">Categorías</h4>
             <div className="border border-gray-200 rounded-lg px-4">
-                <Accordion type="single" collapsible>
+                <Accordion defaultValue={initialFilters.main_category} type="single" collapsible>
                     {main_categories ? (
                         main_categories.map((category) => (
-                            <AccordionItem key={category.id} value={category.id}>
+                            <AccordionItem key={category.id} value={category.name}>
                                 <AccordionTrigger className={`${selectedMainCategory === category.name
                                     && 'text-primary-300 !font-semibold underline underline-offset-2'}`}
                                 >
                                     {category.name}
                                 </AccordionTrigger>
                                 <AccordionContent>
-                                    {sub_categories
+                                    {(sub_categories || [])
                                         .filter((sub) => sub.main_category_id === category.id)
                                         .map((subcategory) => (
                                             <button
