@@ -104,12 +104,12 @@ export default function FilteredProducts({ products, main_categories, sub_catego
             <Filters initialFilters={filters} main_categories={main_categories} sub_categories={sub_categories} onChange={setFilters} />
             {isLoading ? (
                 <div className="w-full md:p-10 min-h-[934px]">
-                    <section className="grid grid-cols-3 max-md:grid-cols-2 gap-4">
+                    <section className="grid grid-cols-3 max-md:grid-cols-2">
                         {Array.from({ length: PRODUCTS_PER_PAGE }).map((_, index) => (
                             <ImageLoader key={index} />
                         ))}
                     </section>
-                    <div className="pagination w-full flex items-center justify-center gap-2 mt-10">
+                    <div className="w-full flex items-center justify-center gap-2 mt-10">
                         <Button disabled>
                             Anterior
                         </Button>
