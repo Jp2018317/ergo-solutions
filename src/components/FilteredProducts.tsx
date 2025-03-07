@@ -12,25 +12,28 @@ import ImageLoader from "@/components/ImageLoader";
 import {Button} from "@components/button";
 import {usePathname, useRouter, useSearchParams} from "next/navigation";
 
-export type ProductsCarouselType = {
-    products: Product[];
-    main_categories: MainCategory[] | null;
-    sub_categories: SubCategory[];
+export type SetFiltersType = {
+    main_category: string;
+    sub_category: string;
+    page: string
 };
 
-export default function FilteredProducts({ products, main_categories, sub_categories }: ProductsCarouselType) {
+export type ProductsCarouselType = {
+    products: Product[] | null;
+    main_categories: MainCategory[] | null;
+    sub_categories: SubCategory[] | null;
+    initialFilters: SetFiltersType;
+};
+
+export default function FilteredProducts({ products, main_categories, sub_categories, initialFilters }: ProductsCarouselType) {
     const router = useRouter();
     const pathname = usePathname();
     const searchParams = useSearchParams();
 
     const [isFirstLoad, setIsFirstLoad] = useState(true);
     const [isLoading, setIsLoading] = useState(false);
-    const [filters, setFilters] = useState<{ main_category: string; sub_category: string, page: string }>({
-        main_category: "",
-        sub_category: "",
-        page: "1",
-    });
-    const [filteredProducts, setFilteredProducts] = useState<Product[]>(products);
+    const [filters, setFilters] = useState<SetFiltersType>(initialFilters);
+    const [filteredProducts, setFilteredProducts] = useState<Product[]>(products || []);
 
     // Estados para la paginación
     const initialPage = searchParams.get("page")
@@ -96,7 +99,7 @@ export default function FilteredProducts({ products, main_categories, sub_catego
 
     return (
         <div className="size-full flex max-md:flex-col gap-4">
-            <Filters main_categories={main_categories || []} sub_categories={sub_categories} onChange={setFilters} />
+            <Filters initialFilters={filters} main_categories={main_categories} sub_categories={sub_categories} onChange={setFilters} />
             {isLoading ? (
                 <div className="w-full md:p-10">
                     <section className="grid grid-cols-3 max-md:grid-cols-2 gap-4">
@@ -125,7 +128,7 @@ export default function FilteredProducts({ products, main_categories, sub_catego
                                                 alt={productData.name}
                                                 height={290}
                                                 width={290}
-                                                src={`${IMAGES_URL}/${productData.main_category.name}/${productData.sub_category.name}/${productData.name}/1.webp`}
+                                                src={`${IMAGES_URL}/${productData.main_category.name}/${productData.sub_category?.name}/${productData.name}/1.webp`}
                                             />
                                         </Link>
                                         <section className="w-full text-center space-y-3">
