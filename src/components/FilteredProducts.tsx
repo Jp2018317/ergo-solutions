@@ -97,8 +97,6 @@ export default function FilteredProducts({ products, main_categories, sub_catego
         }
     };
 
-    console.log({filteredProducts})
-
     return (
         <div className="size-full flex max-md:flex-col gap-4">
             <Filters initialFilters={filters} main_categories={main_categories} sub_categories={sub_categories} onChange={setFilters} />
