@@ -54,7 +54,7 @@ export default function ProductImagesCarousel({product}: ProductImagesCarouselTy
                                 alt={`Imagen ${index + 1}`}
                                 height={500}
                                 width={500}
-                                src={`${IMAGES_URL}/${product.main_category.name}/${product.sub_category.name}/${product.name}/${index + 1}.webp`}
+                                src={`${IMAGES_URL}/${product.main_category.name}/${product.sub_category.name}/${product.name}/${index + 1}.jpg`}
                             />
                         </div>
                     </CarouselItem>

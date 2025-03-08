@@ -68,7 +68,7 @@ export default function ProductsCarousel({products}: ProductsCarouselType) {
                                 alt={'alt'}
                                 height={290}
                                 width={290}
-                                src={`${IMAGES_URL}/${productData.main_category}/${productData.sub_category}/${productData.name}/1.webp`}
+                                src={`${IMAGES_URL}/${productData.main_category}/${productData.sub_category}/${productData.name}/1.jpg`}
                             />
                         </Link>
                         <section
