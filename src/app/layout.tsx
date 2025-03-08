@@ -11,24 +11,36 @@ import * as React from "react";
 config.autoAddCss = false;
 
 export const metadata: Metadata = {
-  title: "Ergo Solutions",
-  description: "Slogan",
+    title: "Ergo Solutions",
+    description: "Slogan",
 };
 
 export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
+                                       children,
+                                   }: Readonly<{
+    children: React.ReactNode;
 }>) {
-  return (
-    <html lang="es">
-      <body
-        className={`${outfit.variable} bg-white`}
-      >
+    return (
+        <html lang="es">
+        <head>
+            <link
+                rel="icon"
+                href="/logo/ergoSolutionsIcon.svg"
+                type="image/svg+xml"
+                media="(prefers-color-scheme: light)"
+            />
+            <link
+                rel="icon"
+                href="/logo/ergoSolutionsIconWhite.svg"
+                type="image/svg+xml"
+                media="(prefers-color-scheme: dark)"
+            />
+        </head>
+        <body className={`${outfit.variable} bg-white`}>
         <NavBarComponent />
         {children}
         <FooterComponent />
-      </body>
-    </html>
-  );
+        </body>
+        </html>
+    );
 }
