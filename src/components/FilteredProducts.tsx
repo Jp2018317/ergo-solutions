@@ -128,7 +128,7 @@ export default function FilteredProducts({ products, main_categories, sub_catego
                                                 alt={productData.name}
                                                 height={290}
                                                 width={290}
-                                                src={`${IMAGES_URL}/${productData.main_category.name}/${productData.sub_category?.name}/${productData.name}/1.jpg`}
+                                                src={`${IMAGES_URL}/${productData.main_category.name}/${productData.sub_category?.name}/${productData.name}/1.jpeg`}
                                             />
                                         </Link>
                                         <section className="w-full text-center space-y-3">
