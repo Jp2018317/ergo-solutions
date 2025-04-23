@@ -28,7 +28,7 @@ export default async function FooterComponent() {
             <h6 className='font-bold mb-2 max-sm:text-action'>Contacto:</h6>
             <div className='flex gap-2'>
                 <FontAwesomeIcon icon={faContactCard} />
-            <   span>Email</span>
+            <   span>Email: ventas@solucionesergonomicas-gt.com</span>
             </div>
               <a className='flex gap-2' href={`https://api.whatsapp.com/send?phone=${WHATSAPP_NUMBER}`} target="_blank" rel="noreferrer">
                 <FontAwesomeIcon icon={faWhatsapp} />
