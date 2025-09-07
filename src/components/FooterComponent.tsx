@@ -4,7 +4,6 @@ import Image from "next/image";
 import DetecomWhite from '@public/logo/DetecomWhite.webp';
 import {faWhatsapp} from "@fortawesome/free-brands-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faContactCard} from "@fortawesome/free-solid-svg-icons";
 import {WHATSAPP_NUMBER} from "@/config";
 
 
