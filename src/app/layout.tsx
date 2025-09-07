@@ -22,7 +22,7 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="es">
-        <head>
+        <head title="Detecom">
             <link
                 rel="icon"
                 href="/logo/detecomIcon.svg"
